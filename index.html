@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Basic Usage</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
+
+    <link rel='stylesheet prefetch' href='https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.5/angular-material.css'>
+<link rel='stylesheet prefetch' href='https://material.angularjs.org/1.0.5/docs.css'>
+
+        <link rel="stylesheet" href="css/style.css">
+
+
+
+
+  </head>
+
+  <body>
+
+    <div ng-controller="AppCtrl" ng-cloak="" class="sliderdemoBasicUsage" ng-app="MyApp">
+  <md-content style="margin: 16px; padding:16px">
+
+    <!-- <h3>
+      RGB <span ng-attr-style="border: 1px solid #333; background: rgb({{color.red}},{{color.green}},{{color.blue}})">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </h3> -->
+    <h3>Strelka/Cushman & Wakefield</h3>
+
+    <div layout="">
+      <div flex="10" layout="" layout-align="center center">
+        <span class="md-body-1">Value 1</span>
+      </div>
+      <md-slider flex="" min="0" max="100" ng-model="value1" aria-label="red" id="red-slider" class="md-primary">
+      </md-slider>
+    </div>
+
+    <div layout="">
+      <div flex="10" layout="" layout-align="center center">
+        <span class="md-body-1">Value 2</span>
+      </div>
+      <md-slider flex="" ng-model="value2" min="0" max="100" aria-label="green" id="green-slider" class="md-primary">
+      </md-slider>
+    </div>
+      Sum {{value1 + value2}}
+    <div class="">
+
+    </div>
+
+  </md-content>
+</div>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+-->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js'></script>
+<script src='http://ngmaterial.assets.s3.amazonaws.com/svg-assets-cache.js'></script>
+<script src='https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.5/angular-material.js'></script>
+
+        <script src="js/index.js"></script>
+
+
+
+
+  </body>
+</html>
