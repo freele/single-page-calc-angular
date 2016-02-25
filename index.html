@@ -24,26 +24,39 @@
     <!-- <h3>
       RGB <span ng-attr-style="border: 1px solid #333; background: rgb({{color.red}},{{color.green}},{{color.blue}})">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
     </h3> -->
-    <h3>Strelka/Cushman & Wakefield</h3>
+    <h1>Strelka/Cushman & Wakefield</h1>
 
-    <div layout="">
-      <div flex="10" layout="" layout-align="center center">
-        <span class="md-body-1">Value 1</span>
-      </div>
-      <md-slider flex="" min="0" max="100" ng-model="value1" aria-label="red" id="red-slider" class="md-primary">
-      </md-slider>
+    <!-- <h3>Old</h3> -->
+    <div layout="column" flex="50">
+      <md-input-container flex="50" class="md-block" flex-gt-sm type="number" ng-repeat="(key, item) in old.inputs">
+        <label>{{item.name}}</label>
+        <input ng-model="item.value">
+      </md-input-container>
     </div>
 
-    <div layout="">
-      <div flex="10" layout="" layout-align="center center">
-        <span class="md-body-1">Value 2</span>
-      </div>
-      <md-slider flex="" ng-model="value2" min="0" max="100" aria-label="green" id="green-slider" class="md-primary">
-      </md-slider>
+    <div layout="row" id="results">
+      <h2 flex="50">
+          Old rent =  {{old.formulas.monthlyRent()}}
+      </h2>
+      <h2 flex="50">
+          New rent = {{new.formulas.monthlyRent()}}
+      </h2>
     </div>
-      Sum {{value1 + value2}}
-    <div class="">
 
+
+    <!-- <h3>New</h3> -->
+    <div layout="row" ng-repeat="(key, item) in new.inputs">
+      <div layout="column" flex="50">
+      </div>
+      <div layout="column" flex="50">
+        <div flex="50" layout="">
+        </div>
+        <div flex="10" layout="">
+          <span class="md-body-1">{{item.name}} = {{item.value}}</span>
+        </div>
+        <md-slider flex="40" min="0" max="100" ng-model="item.value" aria-label="red" id="red-slider" class="md-primary">
+        </md-slider>
+      </div>
     </div>
 
   </md-content>
