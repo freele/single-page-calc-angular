@@ -8,66 +8,109 @@ angular.module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
 })
 .controller('AppCtrl', function($scope) {
 
+  // input a = Leasable area
+  // input b = vacancy percentage
+  // input c = rent per sq. m per year
+  //
+  // OLD RENT = input a * (100 - input b) * input c /1200
+  //
+
   $scope.old = {
     inputs: {
-      totalArea: {
-        name: 'Total office area',
-        value: 33000,
+      leasableArea: {
+        name: 'Leasable area',
+        value: 0,
+      },
+      vacancyPercentage: {
+        name: 'Vacancy percentage',
+        value: 0,
       },
       rent: {
-        name: 'Rent per sq. m. per year',
-        value: 20,
-      },
-      expense: {
-        name: 'Operating Expense per sq. m. per year',
-        value: 58.3333333,
+        name: 'Rent per sq. m per year',
+        value: 0,
       }
     },
     formulas: {
-      monthlyRent: function monthlyRent() {
+      rent: function rent() {
         var i = $scope.old.inputs;
 
-        var result = i.totalArea.value * i.rent.value / 12 + i.expense.value / 12 + 16.66;
-        $scope.old.results.monthlyRent = result;
+        var result = i.leasableArea.value * (100 - i.vacancyPercentage.value) * i.rent.value / 1200;
+        $scope.old.results.rent = result;
         return result.toFixed(2);
       }
     },
     results: {},
   }
+  //
+  // input d = average working hours per week
+  // input e = average contract duration days
+  // input f = office usage
+  // input g = Additional hours for program per day
+  // input h = Engagement level 1
+  // input i = percentage of vacancy for special program
+  // input j = Engagement Level 2
+
+  // (Old Rent * input f/100) + [input a * (100-input b) * input h * input g * 30.44 * 0.1 /10000] + [input a * input b * input i * input j * 243.52 / 1,000,000]
 
   $scope.new = {
-    constants: {
-
-    },
     inputs: {
-      office: {
+      avWorkingHours: {
+        name: 'Average working hours per week',
+        value: 1,
+        min: 1,
+        max: 168,
+      },
+      avContractDuration: {
+        name: 'Average contract duration days',
+        value: 1,
+        min: 1,
+        max: 180,
+      },
+      officeUsage: {
         name: 'Office usage',
         value: 0,
+        min: 0,
+        max: 100,
       },
-      meetings: {
-        name: 'Meetings usage',
-        value: 0,
+      addHours: {
+        name: 'Additional hours for program per day',
+        value: 1,
+        min: 1,
+        max: 24,
       },
-      kitchen: {
-        name: 'Kitchen usage',
+      eng1: {
+        name: 'Engagement level 1',
         value: 0,
+        min: 0,
+        max: 100,
       },
-      storage: {
-        name: 'Storage usage',
+      vacancyPercentage: {
+        name: 'Percentage of vacancy for special program',
         value: 0,
+        min: 0,
+        max: 100,
       },
-      print: {
-        name: 'Print usage',
+      eng2: {
+        name: 'Engagement level 2',
         value: 0,
-      }
+        min: 0,
+        max: 100,
+      },
     },
     formulas: {
-      monthlyRent: function monthlyRent() {
+      rent: function rent() {
         var i = $scope.new.inputs;
-        var oldRent = $scope.old.results.monthlyRent;
+        var iOld = $scope.old.inputs;
+        var oldRent = $scope.old.results.rent;
 
-        var result = oldRent / 100 * (0.759 * i.office.value + 0.167 * i.meetings.value + 0.26 * i.kitchen.value + 0.027 * i.storage.value + 0.021 * i.print.value);
-        $scope.new.results.monthlyRent = result;
+        // (Old Rent * input f/100) + [input a * (100-input b) * input h * input g * 30.44 * 0.1 /10000] + [input a * input b * input i * input j * 243.52 / 1,000,000]
+
+        var temp1 = oldRent*i.officeUsage.value/100;
+        var temp2 = (iOld.leasableArea.value * (100 - iOld.vacancyPercentage.value) * i.eng1.value * i.addHours.value * 30.44 * 0.1 / 10000);
+        var temp3 = iOld.leasableArea.value * iOld.vacancyPercentage.value * i.vacancyPercentage.value * i.eng2.value * 243.52 / 1000000;
+        debugger;
+        var result = temp1 + temp2 + temp3;
+        $scope.new.results.rent = result;
         return result.toFixed(2);
       }
     },

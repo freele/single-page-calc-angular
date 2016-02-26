@@ -36,10 +36,10 @@
 
     <div layout="row" id="results">
       <h2 flex="50">
-          Old rent =  {{old.formulas.monthlyRent()}}
+          Old rent =  {{old.formulas.rent()}}
       </h2>
       <h2 flex="50">
-          New rent = {{new.formulas.monthlyRent()}}
+          New rent = {{new.formulas.rent()}}
       </h2>
     </div>
 
@@ -54,7 +54,7 @@
         <div flex="10" layout="">
           <span class="md-body-1">{{item.name}} = {{item.value}}</span>
         </div>
-        <md-slider flex="40" min="0" max="100" ng-model="item.value" aria-label="red" id="red-slider" class="md-primary">
+        <md-slider flex="40" min="{{item.min}}" max="{{item.max}}" ng-model="item.value" aria-label="red" id="red-slider" class="md-primary">
         </md-slider>
       </div>
     </div>
